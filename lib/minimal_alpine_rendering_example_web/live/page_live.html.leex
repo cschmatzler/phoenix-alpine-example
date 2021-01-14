@@ -1,0 +1,62 @@
+
+<section class="bug-example">
+  <button phx-click="add_element">Add an element</button>
+  <h1>This is without any alpine declarations</h1>
+  <ul>
+    <%= for element <- @list do %>
+      <li><%= element.name %></li>
+    <% end %>
+  </ul>
+  <h1>This uses x-on:click</h1>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">
+          List element
+        </th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for element <- @list do %>
+        <tr>
+          <td >
+            <%= element.name %>
+          </td>
+          <td>
+            <button x-data x-on:click="alert('<%= element.id %>, <%= element.name %>')" :key="<%= element.id %>">Alert with element</button>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <h1>This uses @click</h1>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">
+          List element
+        </th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for element <- @list do %>
+        <tr>
+          <td >
+            <%= element.name %>
+          </td>
+          <td>
+            <button x-data @click="alert('<%= element.id %>', '<%= element.name %>')" :key="<%= element.id %>">Alert with element</button>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <h1>This is without any alpine declarations, but after @click is used</h1>
+  <ul>
+    <%= for element <- @list do %>
+      <li><%= element.name %></li>
+    <% end %>
+  </ul>
+</section>
