@@ -20,11 +20,34 @@
     <tbody>
       <%= for element <- @list do %>
         <tr>
-          <td >
+          <td>
             <%= element.name %>
           </td>
           <td>
             <button x-data x-on:click="alert('<%= element.id %>, <%= element.name %>')" :key="<%= element.id %>">Alert with element</button>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <h1>This uses x-on:click, workaround using x-data</h1>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">
+          List element
+        </th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for element <- @list do %>
+        <tr>
+          <td>
+            <%= element.name %>
+          </td>
+          <td x-data="{ id: <%= element.id %>, name: '<%= element.name %>' }">
+            <button x-on:click="alert(id + ', ' + name)" :key="<%= element.id %>">Alert with element</button>
           </td>
         </tr>
       <% end %>
@@ -47,7 +70,7 @@
             <%= element.name %>
           </td>
           <td>
-            <button x-data @click="alert('<%= element.id %>', '<%= element.name %>')" :key="<%= element.id %>">Alert with element</button>
+            <button x-data @click="alert('<%= element.id %>, <%= element.name %>')" :key="<%= element.id %>">Alert with element</button>
           </td>
         </tr>
       <% end %>
